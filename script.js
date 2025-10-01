@@ -1,19 +1,16 @@
 const jokeEl = document.getElementById('joke');
-const jokeBtn = document.getElementById('jokeBtn');
+const jokeBtn = document.getElementById('joke-btn');
 
-function generateJoke() {
+async function generateJoke() {
    const config = {
      headers: {
        Accept: 'application/json',
      },
    };
-
-   fetch('https://icanhazdadjoke.com', config)
-     .then((res) => res.json())
-     .then((data) => {
-     jokeEl.innerHTML = data.joke;
-     });
- }
+   const res = await fetch('https://icanhazdadjoke.com', config);
+   const data = await res.json();
+   console.log(data);
+   jokeEl.innerHTML = data.joke;
+}
 
 generateJoke();
-jokeBtn.addEventListener('click', generateJoke);
